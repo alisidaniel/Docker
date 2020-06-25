@@ -1,0 +1,31 @@
+version: "3.8"
+services:
+  user-service:
+    build:
+      context: ./user-service
+      dockerfile: DockerFile
+    depends_on:
+      - userservice_db
+    volumes:
+      - ./user-service:/opt/app
+  
+  userservice_db:
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=userservice
+      - MONGO_INITDB_ROOT_PASSWORD=0987654321
+    image: mongo:latest
+
+  product-service:
+    build:
+      context: ./product-service
+      dockerfile: DockerFile
+    depends_on:
+      - productservice_db
+    volumes:
+      - ./product-service:/opt/app
+
+  productservice_db:
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=productservice
+      - MONGO_INITDB_ROOT_PASSWORD=0987654321
+    image: mongo:latest
