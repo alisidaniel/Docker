@@ -6,6 +6,8 @@ services:
       dockerfile: DockerFile
     depends_on:
       - userservice_db
+    environment:
+      - DB_URI=mongodb+srv://userservice:0987654321@cluster0-n4wcr.mongodb.net/test
     volumes:
       - ./user-service:/opt/app
   
@@ -14,6 +16,8 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=userservice
       - MONGO_INITDB_ROOT_PASSWORD=0987654321
     image: mongo:latest
+    ports:
+      - 0.0.0.0:7200:27017
 
   product-service:
     build:
@@ -21,6 +25,8 @@ services:
       dockerfile: DockerFile
     depends_on:
       - productservice_db
+    environment:
+      - DB_URI=mongodb+srv://productservice:0987654321@cluster0-n4wcr.mongodb.net/test
     volumes:
       - ./product-service:/opt/app
 
@@ -29,3 +35,5 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=productservice
       - MONGO_INITDB_ROOT_PASSWORD=0987654321
     image: mongo:latest
+    ports:
+      - 0.0.0.0:7201:27017

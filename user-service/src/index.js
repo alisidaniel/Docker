@@ -1,3 +1,5 @@
-import path from "path";
+import "@babel/polyfill";
+import "dotenv/config";
 
-console.log("User service is working..");
+import "#root/mongodb/config/connection";
+import "#root/server/server";
